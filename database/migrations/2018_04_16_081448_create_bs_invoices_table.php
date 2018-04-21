@@ -15,18 +15,18 @@ class CreateBsInvoicesTable extends Migration
     {
         Schema::create('bs_invoices', function (Blueprint $table) {
             $table->increments('id');
-             $table->string('customer_name');
-            $table->string('phone_number');
-            $table->string('sub_total');
-            $table->string('tax_perc');
-            $table->string('tax_amount');
-            $table->string('disc_perc');
-            $table->string('disc_amount');
-            $table->string('total_amount');
-            $table->string('paid');
-            $table->string('balance');
-             $table->integer('bill_generated_by');
-            $table->integer('bill_updated_by');
+             $table->string('customer_name')->default(null;
+            $table->string('phone_number')->default(null);
+            $table->string('sub_total')->default(null;
+            $table->string('tax_perc')->default(null;
+            $table->string('tax_amount')->default(null;
+            $table->string('disc_perc')->default(null;
+            $table->string('disc_amount')->default(null;
+            $table->string('total_amount')->default(null;
+            $table->string('paid')->default(null;
+            $table->string('balance')->default(null;
+             $table->string('bill_generated_by')->default(null;
+            $table->integer('bill_updated_by')->default(null;
             $table->timestamps();
         });
     }

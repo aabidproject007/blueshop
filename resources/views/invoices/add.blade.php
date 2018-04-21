@@ -207,11 +207,9 @@
 						<div class="form-group form-group-sm  no-margin-bottom">
 					
 							
-								<select class="form-control item-select vendor-row" id="vendor" name=vendor[]>
+								<select name="vendor[]" class="form-control item-select vendor-row" id="vendor" >
 								 
 									 <option value="" readonly=true class="separator">Vendor</option>
-									 
-									 
 									  @foreach ($vendor as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
@@ -254,15 +252,15 @@
 					    <td class="text-right" class="col-sm-1">
 							<div class="input-group input-group-sm">
 								<span class="input-group-addon">&#8377</span>
-								<input type="text" class="form-control calculate-sub" name="invoice_product_sub[]" id="invoice_product_sub" value="0.00" aria-describedby="sizing-addon1" disabled="">
+								<input type="text" class="form-control calculate-sub" name="invoice_product_sub[]" id="invoice_product_sub" value="0.00" aria-describedby="sizing-addon1" >
 							</div>
 						</td>
 						<td class="text-right" class="col-sm-2">
 							<div class="input-group input-group-sm  no-margin-bottom">
-								<select class="form-control item-select" id="vendor" name=vendor[]>
+								<select class="form-control item-select" id="vendor" name=salesperson[]>
 									 <option value="">sales person</option>
 									  @foreach ($user as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
           
 
@@ -354,7 +352,8 @@
 						</div>
 						<div class="col-xs-3">
 							&#8377;<span class="balance" id="balance">0.00</span>
-							<input type="hidden" name="balance" >
+							<input type="hidden" name="balance" id="invoice_balance">
+						
 						</div>
 					</div>
 				</div>
@@ -365,7 +364,7 @@
 			
 				<div class="col-xs-12 margin-top btn-group">
 					<input type="submit" id="action_create_invoice" class="btn btn-success float-right" value="Create Invoice" data-loading-text="Creating...">
-					<button type="submit" class="btn btn-success"> create Invoice</button>
+					<!--<button type="submit" class="btn btn-success"> create Invoice</button>-->
 				</div>
 			</div>
 		</form>
@@ -448,11 +447,12 @@
 					var strArray = gsthidden.split(',');
 				
 				var a=strArray.indexOf(id);
-				if(a=="-1"){
+				
+				if(a== -1){
 					
 						var sgst=parseFloat(id)/2;
             			
-						$('#gst-tax').append('<div class="col-xs-4 col-xs-offset-5"><strong class="shipping">S-GST '+sgst+'%:</strong></div><div class="col-xs-3">&#8377;<span class="sgst" id="s'+id+'">0.00</span></div><div class="col-xs-4 col-xs-offset-5"><strong class="shipping">C-GST '+sgst+'%:</strong></div><div class="col-xs-3">&#8377;<span class="cgst" id="c'+id+'">0.00</span></div>');/*
+						$('#gst-tax').append('<div class="gst'+id+'"><div class="col-xs-4 col-xs-offset-5"><strong class="shipping">S-GST '+sgst+'%:</strong></div><div class="col-xs-3">&#8377;<span class="sgst" id="s'+id+'">0.00</span></div><div class="col-xs-4 col-xs-offset-5"><strong class="shipping">C-GST '+sgst+'%:</strong></div><div class="col-xs-3">&#8377;<span class="cgst" id="c'+id+'">0.00</span></div></div>');/*
 						$('#gst-hidden').append( ).val(id+",");*/
 						gstadd=$('#gst-hidden').val();
 						$('#gst-hidden').val(gstadd + "," + id);
@@ -478,51 +478,10 @@
            
         }*/
             	}
- $('#invoice_table').on('input', '.calculate', function () {
-	    updategstTotals(this);
-	    /*calculategstTotal();*/
-	});
+ 
 	
-       function updategstTotals(elem) {
-       	
-       	var tr = $(elem).closest('tr'),
-            quantity = $('[name="invoice_product_qty[]"]', tr).val(),
-	        price = $('[name="invoice_product_price[]"]', tr).val(),
-        
-           gstpercent = $('[name="gst_per[]"]', tr).val();
-          findgst(gstpercent);
-          
-          }
-          function findgst(id){
-          	
-		  	var stax=0;
-		  	var gid=id;
-           $('#invoice_table tbody tr').each(function() {
-                       
-                quantity = $('[name="invoice_product_qty[]"]', this).val(),
-	            price = $('[name="invoice_product_price[]"]', this).val() || 0,
-                 gstpercent = $('[name="gst_per[]"]',this).val();
-               if(gid == gstpercent){
-			
-			   	 subtotal = parseInt(quantity) * parseFloat(price);
-                 gst_tax = ((parseFloat(gstpercent) / 100) * subtotal)/2;
-                 stax+=gst_tax;
-               
-			   }
-			   else{
-			
-			   }
-			
-            
-	    });
-        
-		 $("#s" + id).text((stax).toFixed(2));
-	      $("#c" + id).text((stax).toFixed(2));
-	  
-            	}
-	  
-	  
-	
+      
+	    
         
     });
 </script>
@@ -673,8 +632,48 @@ $(document).ready(function() {
     // remove product row
     $('#invoice_table').on('click', ".delete-row", function(e) {
     	e.preventDefault();
+    	
+       var count=0;
+     var tr=$(this).closest('tr'),
+           
+       sgst = $('[name="gst_per[]"]', tr).val();
+         
+        $('#invoice_table tbody tr').each(function() {
+            
+                 gstpercent = $('[name="gst_per[]"]',this).val();
+              
+                if(gstpercent){
+					if(sgst == gstpercent)
+	        {
+			 
+				count++;
+			}
+				}
+	        
+			
+            
+	    });
+	      if(sgst){
+	    if(count == 1)
+	    {
+	    var gsthidden=$('#gst-hidden').val();
+            	
+					var arr = gsthidden.split(',');
+	    	
+    var itemtoRemove = "," +sgst;
+    arr.splice($.inArray(itemtoRemove, arr),1);
+	    		
+						$('#gst-hidden').val(arr);
+	    		  	
+			$(".gst" + sgst).remove();
+		
+					
+		}
+    	}
        	$(this).closest('tr').remove();
+        findgst(sgst);
         calculateTotal();
+        
     });
 
     // add new product row on invoice
@@ -701,6 +700,7 @@ $(document).ready(function() {
     
     $('#invoice_table').on('input', '.calculate', function () {
 	    updateTotals(this);
+	    updategstTotals(this);
 	    calculateTotal();
 	});
 
@@ -750,8 +750,44 @@ $(document).ready(function() {
 	  
 	  
 	}
-
-	function calculateTotal() {
+    function updategstTotals(elem) {
+       	
+       	var tr = $(elem).closest('tr'),
+            quantity = $('[name="invoice_product_qty[]"]', tr).val(),
+	        price = $('[name="invoice_product_price[]"]', tr).val(),
+        
+           gstpercent = $('[name="gst_per[]"]', tr).val();
+          findgst(gstpercent);
+          
+          }
+    function findgst(id){
+          	
+		  	var stax=0;
+		  	var gid=id;
+           $('#invoice_table tbody tr').each(function() {
+                       
+                quantity = $('[name="invoice_product_qty[]"]', this).val(),
+	            price = $('[name="invoice_product_price[]"]', this).val() || 0,
+                 gstpercent = $('[name="gst_per[]"]',this).val();
+               if(gid == gstpercent){
+			
+			   	 subtotal = parseInt(quantity) * parseFloat(price);
+                 gst_tax = ((parseFloat(gstpercent) / 100) * subtotal)/2;
+                 stax+=gst_tax;
+               
+			   }
+			   else{
+			
+			   }
+			
+            
+	    });
+        
+		 $("#s" + id).text((stax).toFixed(2));
+	      $("#c" + id).text((stax).toFixed(2));
+	  
+            	}
+    function calculateTotal() {
 	    
 	    var grandTotal = 0,
 	    	disc = 0,
@@ -775,7 +811,7 @@ $(document).ready(function() {
             grandTotal += parseFloat(c_sbt)  ;
             grandgstTotal += parseFloat(gst_tax)  ;
             disc += subtotal - parseFloat(c_sbt);
-           
+             $('[name="gst_tax[]"]', this).val(gst_tax.toFixed(2));
             
 	    });
 		if(grandgstTotal){}else{grandgstTotal=0;}
@@ -803,7 +839,7 @@ $(document).ready(function() {
         $('.invoice-discount').text(disc.toFixed(2));
         $('#invoice_discount').val(disc.toFixed(2));
         $('.balance').text(balance.toFixed(2));
-
+        $('#invoice_balance').val(balance.toFixed(2));
         if($('.invoice-vat').attr('data-enable-vat') === '1') {
 
 	        if($('.invoice-vat').attr('data-vat-method') === '1') {
@@ -832,7 +868,72 @@ $(document).ready(function() {
 	    }
 
 	}
-   });
+			//add action invoice
+		
+	       function actionCreateInvoice() {
+
+		var errorCounter = validateForm();
+
+		if (errorCounter > 0) {
+		    $("#response").removeClass("alert-success").addClass("alert-warning").fadeIn();
+		    $("#response .message").html("<strong>Error</strong>: It appear's you have forgotten to complete something!");
+		    $("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+		} else {
+
+			var $btn = $("#action_create_invoice").button("loading");
+
+			$(".required").parent().removeClass("has-error");
+			$("#create_invoice").find(':input:disabled').removeAttr('disabled');
+
+			$.ajax({
+
+				url: "{{route('invoice_add')}}",
+				type: 'POST',
+			/*	 data: {name: name, email: email, password: password, role: role,_token: '{{ csrf_token() }}'},*/
+				data: $("#create_invoice").serialize(),
+				dataType: 'json',
+				success: function(data){
+					$("#create_invoice").load(" #create_invoice");
+					$("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+					$("#response").removeClass("alert-warning").addClass("alert-success").fadeIn();
+					$("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+					/*$("#create_invoice").before().html("<a href='/invoice-add.php' class='btn btn-primary'>Create new invoice</a>");*/
+					
+					/*$("#create_invoice").remove();*/
+					$btn.button("reset");
+				
+				
+				},
+				error: function(data){
+					$("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+					$("#response").removeClass("alert-success").addClass("alert-warning").fadeIn();
+					$("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+					$btn.button("reset");
+				}
+
+			});
+		}
+
+	}
+ 		   function validateForm() {
+	    // error handling
+	    var errorCounter = 0;
+
+	    $(".required").each(function(i, obj) {
+
+	        if($(this).val() === ''){
+	            $(this).parent().addClass("has-error");
+	            errorCounter++;
+	        } else{ 
+	            $(this).parent().removeClass("has-error"); 
+	        }
+
+
+	    });
+
+	    return errorCounter;
+	}
+});
 </script>
    
 @endsection

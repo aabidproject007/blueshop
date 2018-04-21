@@ -21,6 +21,12 @@ class CreateBsInvoiceItemsTable extends Migration
             $table->string('disc_amount');
             $table->string('tax_amount');
             $table->string('disc_perc');
+            $table->string('salesperson');
+            
+            $table->string('vendor');
+            $table->string('item');
+            $table->string('gst_per');
+            $table->string('gst_tax');
              $table->integer('bill_id');
             $table->integer('salesperson_id');
             $table->timestamps();

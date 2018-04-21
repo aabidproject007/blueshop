@@ -106,8 +106,8 @@ $(document).ready(function() {
 
 	});
 
-	/*// email invoice
-	$(document).on('click', ".email-invoice", function(e) {
+	// email invoice
+	/*$(document).on('click', ".email-invoice", function(e) {
         e.preventDefault();
 
         var invoiceId = 'action=email_invoice&id='+$(this).attr('data-invoice-id')+'&email='+$(this).attr('data-email')+'&invoice_type='+$(this).attr('data-invoice-type')+'&custom_email='+$(this).attr('data-custom-email'); //build a post data structure
@@ -254,24 +254,23 @@ $(document).ready(function() {
     });
 
     // add new product row on invoice
-      var count = 0; // Global unique counter
-      var cloned = $('#invoice_table tr:last').clone();
-      $('.add-row').click(function() {
-            count++; // Increment counter
-            /*$('#invoice_table tbody > tr:last').clone(true).appendTo('#invoice_table ')*/
-            cloned.clone().appendTo('#invoice_table').
+     // var count = 0; // Global unique counter
+     // var cloned = $('#invoice_table tr:last').clone();
+      //$('.add-row').click(function() {
+         //   count++; // Increment counter
+             cloned.clone().appendTo('#invoice_table').
              // Clone and append
-                  filter('[id]').each(function() { // For each new item with an ID
-                        this.id = this.id + '_' + count; // Append the counter to the ID
-                  });
-            return false;
-      });
-   /* var cloned = $('#invoice_table tr:last').clone();
+                 // filter('[id]').each(function() { // For each new item with an ID
+                    //    this.id = this.id + '_' + count; // Append the counter to the ID
+                 // });
+           // return false;
+      //});
+    var cloned = $('#invoice_table tr:last').clone();
    
     $(".add-row").click(function(e) {
         e.preventDefault();
         cloned.clone().appendTo('#invoice_table'); 
-    });*/
+    });
     
     calculateTotal();
     
