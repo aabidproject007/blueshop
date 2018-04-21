@@ -18,22 +18,92 @@ class ComposerStaticInit502049bab35e253e5f1cc5331555d523
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
     );
 
-    public static $firstCharsPsr4 = array (
-        'p' => true,
-        'X' => true,
-        'W' => true,
-        'T' => true,
-        'S' => true,
-        'R' => true,
-        'P' => true,
-        'M' => true,
-        'L' => true,
-        'I' => true,
-        'F' => true,
-        'E' => true,
-        'D' => true,
-        'C' => true,
-        'A' => true,
+    public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'X' => 
+        array (
+            'XdgBaseDir\\' => 11,
+        ),
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+            'Webmozart\\Assert\\' => 17,
+        ),
+        'T' => 
+        array (
+            'TijsVerkoyen\\CssToInlineStyles\\' => 31,
+            'Tests\\' => 6,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Thanks\\' => 15,
+            'Symfony\\Polyfill\\Php70\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
+            'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\Routing\\' => 26,
+            'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\HttpKernel\\' => 29,
+            'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Symfony\\Component\\Finder\\' => 25,
+            'Symfony\\Component\\EventDispatcher\\' => 34,
+            'Symfony\\Component\\Debug\\' => 24,
+            'Symfony\\Component\\CssSelector\\' => 30,
+            'Symfony\\Component\\Console\\' => 26,
+        ),
+        'R' => 
+        array (
+            'Ramsey\\Uuid\\' => 12,
+        ),
+        'P' => 
+        array (
+            'Psy\\' => 4,
+            'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
+            'PhpParser\\' => 10,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
+        'L' => 
+        array (
+            'League\\Flysystem\\' => 17,
+            'Laravel\\Tinker\\' => 15,
+        ),
+        'I' => 
+        array (
+            'Illuminate\\' => 11,
+        ),
+        'F' => 
+        array (
+            'Fideloper\\Proxy\\' => 16,
+            'Faker\\' => 6,
+        ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+            'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\Common\\Inflector\\' => 26,
+            'DeepCopy\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Cron\\' => 5,
+            'Carbon\\' => 7,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -241,6 +311,12 @@ class ComposerStaticInit502049bab35e253e5f1cc5331555d523
     );
 
     public static $classMap = array (
+        'App\\BsCompany' => __DIR__ . '/../..' . '/app/BsCompany.php',
+        'App\\BsInvoice' => __DIR__ . '/../..' . '/app/BsInvoice.php',
+        'App\\BsInvoiceDetail' => __DIR__ . '/../..' . '/app/BsInvoiceDetail.php',
+        'App\\BsInvoiceItem' => __DIR__ . '/../..' . '/app/BsInvoiceItem.php',
+        'App\\BsItems' => __DIR__ . '/../..' . '/app/BsItems.php',
+        'App\\BsUsers' => __DIR__ . '/../..' . '/app/BsUsers.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -248,18 +324,30 @@ class ComposerStaticInit502049bab35e253e5f1cc5331555d523
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemController.php',
+        'App\\Http\\Controllers\\SaleController' => __DIR__ . '/../..' . '/app/Http/Controllers/SaleController.php',
+        'App\\Http\\Controllers\\SaledetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/SaledetailController.php',
+        'App\\Http\\Controllers\\SalespersonController' => __DIR__ . '/../..' . '/app/Http/Controllers/SalespersonController.php',
+        'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
+        'App\\Http\\Controllers\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Item' => __DIR__ . '/../..' . '/app/Item.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Sale' => __DIR__ . '/../..' . '/app/Sale.php',
+        'App\\Saledetail' => __DIR__ . '/../..' . '/app/Saledetail.php',
+        'App\\Salesperson' => __DIR__ . '/../..' . '/app/Salesperson.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\Vendor' => __DIR__ . '/../..' . '/app/Vendor.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -3561,7 +3649,7 @@ class ComposerStaticInit502049bab35e253e5f1cc5331555d523
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->firstCharsPsr4 = ComposerStaticInit502049bab35e253e5f1cc5331555d523::$firstCharsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit502049bab35e253e5f1cc5331555d523::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit502049bab35e253e5f1cc5331555d523::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit502049bab35e253e5f1cc5331555d523::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit502049bab35e253e5f1cc5331555d523::$classMap;
